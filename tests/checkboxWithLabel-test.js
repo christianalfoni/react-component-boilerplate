@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 describe('CheckboxWithLabel', function() {
   it('changes the text after click', function() {
     var React = require('react/addons');
-    var CheckboxWithLabel = require('../CheckboxWithLabel.js');
+    var CheckboxWithLabel = require('../app/CheckboxWithLabel.js');
     var TestUtils = React.addons.TestUtils;
 
     // Render a checkbox with label in the document
@@ -15,12 +15,12 @@ describe('CheckboxWithLabel', function() {
     // Verify that it's Off by default
     var label = TestUtils.findRenderedDOMComponentWithTag(
       checkbox, 'label');
-    expect(label.getDOMNode().textContent).to.equal('Off');
+    expect(label.getDOMNode().textContent.trim()).to.equal('Off');
 
     // Simulate a click and verify that it is now On
     var input = TestUtils.findRenderedDOMComponentWithTag(
       checkbox, 'input');
     TestUtils.Simulate.change(input);
-    expect(label.getDOMNode().textContent).to.equal('On');
+    expect(label.getDOMNode().textContent.trim()).to.equal('On');
   });
 });

@@ -1,42 +1,50 @@
 // Gulp dependencies
 var gulp = require('gulp');
-var source = require('vinyl-source-stream');
-var browserify = require('browserify');
-var watchify = require('watchify');
-var reactify = require('reactify');
-var livereload = require('gulp-livereload');
 var gutil = require('gulp-util');
-var gulpif = require('gulp-if');
 
-var handleError = require('./gulp/handleError');
+var browserify = require('./gulp/browserify.js'); 
+var css = require('./gulp/css.js');
 
-/** 
-  Use Browserify to bundle up our tests.
+var DEFAULT_OPTIONS = {
+	browserify: {
+		src: './app/main.js',
+		isTest: false,
+		dest: './build/',
+		watch: true,
+		uglify: false
+	},
+	css: {
+		src: './styles/**/*.css',
+		dest: './build/',
+		watch: true
+	}
+};
 
-  gulp test --watch --tests './tests/checkboxWithLabel-test.js'
+gulp.task('browserify', function () {
+	return browserify(DEFAULT_OPTIONS.browserify);
+});
 
-  Thanks to - http://blog.avisi.nl/2014/04/25/how-to-keep-a-fast-build-with-browserify-and-reactjs/ 
-*/
+gulp.task('css', function () {
+	return css(DEFAULT_OPTIONS.css);
+});
+
+gulp.task('default', ['browserify', 'css']);
+
+gulp.task('build', function () {
+	DEFAULT_OPTIONS.browserify.dest = './dist/';
+	DEFAULT_OPTIONS.browserify.watch = false;
+	DEFAULT_OPTIONS.browserify.uglify = true;
+	browserify(DEFAULT_OPTIONS.browserify);
+
+	DEFAULT_OPTIONS.css.dest = './dist/';
+	DEFAULT_OPTIONS.css.watch = false;
+	css(DEFAULT_OPTIONS.css);
+});
+
 gulp.task('test', function () {
-    var componentToTestPath = gutil.env.tests;
-    var bundler = browserify(componentToTestPath, watchify.args);
-
-    if(gutil.env.watch) {
-        livereload.listen();
-        bundler = watchify(bundler);
-    }
-
-    bundler.transform(reactify);
-
-    var rebundle = function() {
-        bundler.bundle()
-            .on('error', handleError('Browserify'))
-            .pipe(source(componentToTestPath))
-            .pipe(gulp.dest('./.tmp/'))
-            .pipe(gulpif(gutil.env.watch, livereload()));
-    };
-
-    bundler.on('update', rebundle);
-
-    return rebundle();
+    var src = '.' + gutil.env[''][''];
+    DEFAULT_OPTIONS.browserify.src = src;
+    DEFAULT_OPTIONS.browserify.isTest = true;
+    browserify.setOptions(DEFAULT_OPTIONS.browserify);
+    return browserify.run();
 });

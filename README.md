@@ -6,11 +6,18 @@ Develop react components quickly with Mocha & Chai. Jest is awesome, but the tes
 
 * Clone the repo
 * Run `npm install`
-* run `gulp test --tests './tests/checkboxWithLabel-test.js'`
-* Open `index.html`
+* Open `build/index.html`
 
-### Livereload
+### Development
+* Run `gulp`
+* Any changes to `app` or `styles` folder will automatically rebuild to `build` folder
 
-* No plugin required, reload script is provided in the index.html
-* Run `gulp test --watch --tests './tests/checkboxWithLabel-test.js'`
-* Edit your component under the tests directory and your tests will automatically be run
+### Tests
+* Run `gulp test -'./tests/checkboxWithLabel-test.js'
+* Open `test.html`
+* Any changes done to the test file or files in `app` folder will autoreload the browser
+
+### Run all tests with Karma
+* Run `npm test`
+
+Karma will launch Chrome and Firefox and will run the tests once.
