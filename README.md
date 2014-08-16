@@ -2,6 +2,8 @@
 
 Develop react components quickly with Mocha & Chai. Jest is awesome, but the tests are far too slow for react components. Based on the following [Gulp file](http://blog.avisi.nl/2014/04/25/how-to-keep-a-fast-build-with-browserify-and-reactjs/) we can achieve continous tests using Livereload that are incredibly fast as well.  Running your tests in the browser eliminates quite a few headaches and you get the benefit of dev tools as well.
 
+This project also has a basic app structure to help you get going.
+
 ### Install
 
 * Clone the repo
@@ -20,4 +22,4 @@ Develop react components quickly with Mocha & Chai. Jest is awesome, but the tes
 ### Run all tests with Karma
 * Run `npm test`
 
-Karma will launch Chrome and Firefox and will run the tests once.
+Karma will launch Chrome and Firefox and run the tests once.
