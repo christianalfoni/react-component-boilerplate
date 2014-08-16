@@ -6,7 +6,7 @@ Develop react components quickly with Mocha & Chai. Jest is awesome, but the tes
 
 * Clone the repo
 * Run `npm install`
-* Open `build/index.html`
+* Open `build/index.html` or run `python -m SimpleHTTPServer` in the `build` folder
 
 ### Development
 * Run `gulp`
